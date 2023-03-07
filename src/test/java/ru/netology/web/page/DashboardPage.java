@@ -37,8 +37,17 @@ public class DashboardPage {
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
+
     public DashboardPage Replenish001(String amount, String numberCard) {
         buttonCard001.click();
+        amountField.setValue(amount);
+        fromField.setValue(numberCard);
+        transferButton.click();
+        return new DashboardPage();
+    }
+
+    public DashboardPage Replenish002(String amount, String numberCard) {
+        buttonCard002.click();
         amountField.setValue(amount);
         fromField.setValue(numberCard);
         transferButton.click();
