@@ -21,7 +21,8 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         int firstBalance = dashboardPage.getCardBalance(0);
         int secondBalance = dashboardPage.getCardBalance(1);
-        dashboardPage.Replenish001(amount, DataHelper.getCard002().getNumber());
+        var transferPage = dashboardPage.transfer(0);
+        transferPage.transfer(amount, DataHelper.getCard002().getNumber());
 
         int actual001 = dashboardPage.getCardBalance(0);
         int expected001 = firstBalance + Integer.parseInt(amount);
@@ -47,7 +48,8 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         int firstBalance = dashboardPage.getCardBalance(0);
         int secondBalance = dashboardPage.getCardBalance(1);
-        dashboardPage.Replenish002(amount, DataHelper.getCard001().getNumber());
+        var transferPage = dashboardPage.transfer(1);
+        transferPage.transfer(amount, DataHelper.getCard001().getNumber());
 
         int actual001 = dashboardPage.getCardBalance(0);
         int expected001 = firstBalance - Integer.parseInt(amount);
@@ -73,17 +75,9 @@ class MoneyTransferTest {
         int firstBalance = dashboardPage.getCardBalance(0);
         int secondBalance = dashboardPage.getCardBalance(1);
         String amount = Integer.toString(secondBalance + 1000);
-        dashboardPage.Replenish001(amount, DataHelper.getCard002().getNumber());
-
-        int actual001 = dashboardPage.getCardBalance(0);
-        int expected001 = firstBalance + secondBalance;
-
-        assertEquals(expected001, actual001);
-
-        int actual002 = dashboardPage.getCardBalance(1);
-        int expected002 = 0;
-
-        assertEquals(expected002, actual002);
+        var transferPage = dashboardPage.transfer(0);
+        transferPage.transfer(amount, DataHelper.getCard002().getNumber());
+        transferPage.transferError();
     }
 
 
